@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ejh-Fj-3Fn">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                            </mapView>
+                            <segmentedControl opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yCe-hc-jNt">
+                                <rect key="frame" x="89" y="607" width="196" height="29"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <segments>
+                                    <segment title="Standard"/>
+                                    <segment title="Hybrid"/>
+                                    <segment title="Satellite"/>
+                                </segments>
+                                <connections>
+                                    <action selector="mapTypeTapped:" destination="BYZ-38-t0r" eventType="valueChanged" id="4Nl-jQ-vnB"/>
+                                </connections>
+                            </segmentedControl>
+                            <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TTTlogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="O8E-mk-XMu">
+                                <rect key="frame" x="20" y="55" width="112" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Tqh-FQ-WNi"/>
+                                    <constraint firstAttribute="width" constant="112" id="qFO-hX-g0z"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="O8E-mk-XMu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="4" id="JMn-kO-uA5"/>
+                            <constraint firstItem="ejh-Fj-3Fn" firstAttribute="centerX" secondItem="yCe-hc-jNt" secondAttribute="centerX" id="KCx-RP-bIQ"/>
+                            <constraint firstItem="ejh-Fj-3Fn" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="UHY-6G-890"/>
+                            <constraint firstItem="O8E-mk-XMu" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="35" id="Ztj-qo-2iq"/>
+                            <constraint firstItem="ejh-Fj-3Fn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mqk-x8-70i"/>
+                            <constraint firstAttribute="trailing" secondItem="ejh-Fj-3Fn" secondAttribute="trailing" id="oT5-aa-ayJ"/>
+                            <constraint firstItem="ejh-Fj-3Fn" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="phf-eb-ChR"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="yCe-hc-jNt" secondAttribute="bottom" constant="32" id="sV0-ov-pQM"/>
+                            <constraint firstItem="yCe-hc-jNt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="73" id="zqg-Xn-exr"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="TTTlogo" destination="O8E-mk-XMu" id="YOl-dd-fUr"/>
+                        <outlet property="mapView" destination="ejh-Fj-3Fn" id="bew-bE-E0t"/>
+                        <outlet property="myMapView" destination="ejh-Fj-3Fn" id="2zD-tu-4uF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="227.5" y="428.5"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="TTTlogo.png" width="277" height="49"/>
+    </resources>
+</document>

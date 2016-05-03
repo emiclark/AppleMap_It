@@ -9,7 +9,7 @@
 #import "WebViewController.h"
 
 @interface UIViewController ()
-@property (retain, nonatomic) WKWebView *myWebView;
+//@property (retain, nonatomic) WKWebView *myWebView;
 
 @end
 
@@ -20,13 +20,14 @@
 #pragma mark View Methods
 -(void)viewDidLoad {
     [super viewDidLoad];
-    
+
     //initialize webkit viewcontroller
     WKWebViewConfiguration *theConfiguration = [[WKWebViewConfiguration alloc] init];
+    
     self.webView = [[WKWebView alloc] initWithFrame:[[UIScreen mainScreen] bounds] configuration:theConfiguration];
     self.webView.navigationDelegate = self;
-    NSURL *nsurl = [NSURL URLWithString:self.displayURL];
-    NSURLRequest *nsrequest=[NSURLRequest requestWithURL:nsurl];
+    self.webView.scrollView.scrollEnabled = YES;
+    NSURLRequest *nsrequest=[NSURLRequest requestWithURL:self.displayURL];
     [self.webView loadRequest:nsrequest];
     [self.view addSubview:self.webView];
 }

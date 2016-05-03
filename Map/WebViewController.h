@@ -12,8 +12,11 @@
 
 @interface WebViewController : UIViewController <UIWebViewDelegate, WKUIDelegate, WKNavigationDelegate>
 
-@property (strong, nonatomic) NSString *displayURL;
+@property (strong, nonatomic) NSURL *displayURL;
 @property (retain, nonatomic) WKWebView *webView;
+
+
+
 
 
 @end

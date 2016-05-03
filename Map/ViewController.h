@@ -23,8 +23,10 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *TTTlogo;
 @property (nonatomic, retain) CLLocationManager *locationManager;
-@property (nonatomic, retain) WebViewController *WebVC;
 @property (weak, nonatomic) IBOutlet MKMapView *myMapView;
+
+@property (nonatomic, retain) WebViewController *webVC;
+
 
 -(IBAction) mapTypeTapped:(UISegmentedControl *)sender;
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;

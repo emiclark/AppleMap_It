@@ -10,20 +10,24 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "WebViewController.h"
+#import "Annotation.h"
 
 
-@interface ViewController : UIViewController <CLLocationManagerDelegate, MKMapViewDelegate>
+//@interface ViewController : UIViewController <CLLocationManagerDelegate, MKMapViewDelegate,UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
+
+@interface ViewController : UIViewController <CLLocationManagerDelegate, MKMapViewDelegate >
+
+@property (weak, nonatomic) IBOutlet UISearchBar *searchResultBar;
+@property (nonatomic, strong) UISearchController *searchController;
+
 
 @property (weak, nonatomic) IBOutlet UIImageView *TTTlogo;
-@property (nonatomic, weak) IBOutlet MKMapView *mapView;
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) WebViewController *WebVC;
+@property (weak, nonatomic) IBOutlet MKMapView *myMapView;
 
-
--(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
-
-- (IBAction)mapTypeTapped:(UISegmentedControl *)sender;
-
+-(IBAction) mapTypeTapped:(UISegmentedControl *)sender;
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
 
 @end
 

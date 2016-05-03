@@ -10,7 +10,10 @@
 #import <WebKit/WebKit.h>
 #import <Foundation/Foundation.h>
 
-@interface WebViewController : UIViewController <WKUIDelegate, WKNavigationDelegate>
-@property (retain, nonatomic) NSURL *myWebURL;
+@interface WebViewController : UIViewController <UIWebViewDelegate, WKUIDelegate, WKNavigationDelegate>
+
+@property (strong, nonatomic) NSString *displayURL;
+@property (retain, nonatomic) WKWebView *webView;
+
 
 @end

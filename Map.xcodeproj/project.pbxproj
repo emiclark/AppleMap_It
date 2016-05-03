@@ -11,6 +11,7 @@
 		AA194FEB1CD4194F003026B3 /* tttlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = AA194FEA1CD4194F003026B3 /* tttlogo.png */; };
 		AA194FED1CD41B3E003026B3 /* tttlogo2.png in Resources */ = {isa = PBXBuildFile; fileRef = AA194FEC1CD41B3E003026B3 /* tttlogo2.png */; };
 		AA194FF01CD41FEC003026B3 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA194FEF1CD41FEC003026B3 /* WebViewController.m */; };
+		AA4EB9EC1CD53363000FBE45 /* TTTlogoRed.png in Resources */ = {isa = PBXBuildFile; fileRef = AA4EB9EB1CD53363000FBE45 /* TTTlogoRed.png */; };
 		AACA240A1CD3C16300D63EF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AACA24091CD3C16300D63EF9 /* main.m */; };
 		AACA240D1CD3C16300D63EF9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AACA240C1CD3C16300D63EF9 /* AppDelegate.m */; };
 		AACA24101CD3C16300D63EF9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AACA240F1CD3C16300D63EF9 /* ViewController.m */; };
@@ -24,7 +25,6 @@
 		AACA24291CD3C88200D63EF9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACA24281CD3C88200D63EF9 /* CoreGraphics.framework */; };
 		AACA242E1CD3CBBF00D63EF9 /* apple.png in Resources */ = {isa = PBXBuildFile; fileRef = AACA242B1CD3CBBF00D63EF9 /* apple.png */; };
 		AACA242F1CD3CBBF00D63EF9 /* flower.gif in Resources */ = {isa = PBXBuildFile; fileRef = AACA242C1CD3CBBF00D63EF9 /* flower.gif */; };
-		AACA24301CD3CBBF00D63EF9 /* TTTlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = AACA242D1CD3CBBF00D63EF9 /* TTTlogo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +33,7 @@
 		AA194FEC1CD41B3E003026B3 /* tttlogo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tttlogo2.png; sourceTree = "<group>"; };
 		AA194FEE1CD41FEC003026B3 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		AA194FEF1CD41FEC003026B3 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		AA4EB9EB1CD53363000FBE45 /* TTTlogoRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TTTlogoRed.png; sourceTree = "<group>"; };
 		AACA24051CD3C16300D63EF9 /* Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Map.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AACA24091CD3C16300D63EF9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AACA240B1CD3C16300D63EF9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,7 +52,6 @@
 		AACA24281CD3C88200D63EF9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		AACA242B1CD3CBBF00D63EF9 /* apple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = apple.png; path = ../../../Swift/Maps/Maps/apple.png; sourceTree = "<group>"; };
 		AACA242C1CD3CBBF00D63EF9 /* flower.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = flower.gif; path = ../../../Swift/Maps/Maps/flower.gif; sourceTree = "<group>"; };
-		AACA242D1CD3CBBF00D63EF9 /* TTTlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TTTlogo.png; path = ../../../Swift/Maps/Maps/TTTlogo.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,12 +129,12 @@
 		AACA24311CD3CBDD00D63EF9 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				AA4EB9EB1CD53363000FBE45 /* TTTlogoRed.png */,
 				AA194FEC1CD41B3E003026B3 /* tttlogo2.png */,
 				AA194FEA1CD4194F003026B3 /* tttlogo.png */,
 				AA194FE81CD41584003026B3 /* dining.png */,
 				AACA242B1CD3CBBF00D63EF9 /* apple.png */,
 				AACA242C1CD3CBBF00D63EF9 /* flower.gif */,
-				AACA242D1CD3CBBF00D63EF9 /* TTTlogo.png */,
 			);
 			name = images;
 			sourceTree = "<group>";
@@ -199,13 +199,13 @@
 			files = (
 				AACA24181CD3C16300D63EF9 /* LaunchScreen.storyboard in Resources */,
 				AACA24151CD3C16300D63EF9 /* Assets.xcassets in Resources */,
-				AACA24301CD3CBBF00D63EF9 /* TTTlogo.png in Resources */,
 				AA194FEB1CD4194F003026B3 /* tttlogo.png in Resources */,
 				AACA242E1CD3CBBF00D63EF9 /* apple.png in Resources */,
 				AACA242F1CD3CBBF00D63EF9 /* flower.gif in Resources */,
 				AACA24131CD3C16300D63EF9 /* Main.storyboard in Resources */,
 				AA194FE91CD41584003026B3 /* dining.png in Resources */,
 				AA194FED1CD41B3E003026B3 /* tttlogo2.png in Resources */,
+				AA4EB9EC1CD53363000FBE45 /* TTTlogoRed.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

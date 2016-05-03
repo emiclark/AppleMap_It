@@ -15,29 +15,21 @@
 
 @implementation WebViewController
 
+
+
 #pragma mark View Methods
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-    //init WKWebView
-    self.myWebView = [[WKWebView alloc] initWithFrame:self.view.frame];
-    
-    NSURL *url  = self.myWebURL;
-    
-    //create url request
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-    
-    //send url request
-    [self.myWebView loadRequest:urlRequest];
-    
-    //assign view to WKWebView
-    self.myWebView.frame = self.view.frame;
-    
-    //add webview to view
-    [self.view addSubview:self.myWebView];
-    
+    //initialize webkit viewcontroller
+    WKWebViewConfiguration *theConfiguration = [[WKWebViewConfiguration alloc] init];
+    self.webView = [[WKWebView alloc] initWithFrame:[[UIScreen mainScreen] bounds] configuration:theConfiguration];
+    self.webView.navigationDelegate = self;
+    NSURL *nsurl = [NSURL URLWithString:self.displayURL];
+    NSURLRequest *nsrequest=[NSURLRequest requestWithURL:nsurl];
+    [self.webView loadRequest:nsrequest];
+    [self.view addSubview:self.webView];
 }
-
 
 #pragma mark Misc Methods
 -(void)didReceiveMemoryWarning {

@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "A206BCB2DED5DE80E0E8877DBC81F37218528565",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "A206BCB2DED5DE80E0E8877DBC81F37218528565" : 0,
+    "3C874297B54C357B56C40DE0C5FCF262F4A37D2F" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "B4749360-CE95-44C5-BEA7-F6E2175331A4",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "A206BCB2DED5DE80E0E8877DBC81F37218528565" : "Map\/",
+    "3C874297B54C357B56C40DE0C5FCF262F4A37D2F" : "..\/Swift\/Maps\/Maps"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Map",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Map.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/emiclark\/Maps.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3C874297B54C357B56C40DE0C5FCF262F4A37D2F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/emiclark\/Maps-ObjectiveC.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A206BCB2DED5DE80E0E8877DBC81F37218528565"
+    }
+  ]
+}

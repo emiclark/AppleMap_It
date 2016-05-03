@@ -7,12 +7,12 @@
 //
 
 #import "ViewController.h"
-#import "Annotation.h"
 
 
-@interface ViewController ()
-@property (weak, nonatomic) IBOutlet MKMapView *myMapView;
+@interface ViewController () <UISearchBarDelegate>
+
 @end
+
 
 @implementation ViewController
 
@@ -21,15 +21,51 @@
 #define TTT_LONGITUDE -73.990039
 #define TTT_SPAN 0.01f;
 
+
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    NSString *query = searchBar.text;
+
+    
+    // Create and initialize a search request object.
+    MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc]init];
+    request.region = self.myMapView.region;
+    request.naturalLanguageQuery = query;
+    // Create and initialize a search object.
+    MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:request];
+    NSLog(@"%@", query);
+    
+    // Start the search and display the results as annotations on the map.
+    [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error)
+     {
+         NSMutableArray *placemarks = [NSMutableArray array];
+         for (MKMapItem *item in response.mapItems) {
+             [placemarks addObject:item.placemark];
+//             NSLog(@"response:%@\nitem:%@",response.mapItems, item);
+         }
+         [self.myMapView removeAnnotations:[self.myMapView annotations]];
+         [self.myMapView showAnnotations:placemarks animated:NO];
+     }];
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.locationManager = [[CLLocationManager alloc]init];
-    [self.locationManager requestWhenInUseAuthorization];
+    CLAuthorizationStatus authorizationStatus = [CLLocationManager authorizationStatus];
+    if (authorizationStatus == kCLAuthorizationStatusAuthorizedAlways ||
+        authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        
+        [self.locationManager startUpdatingLocation];
+        self.myMapView.showsUserLocation = YES;
+        
+    }
     
-    self.mapView.delegate = self;
-    self.mapView.showsUserLocation = YES;
+    self.myMapView.delegate = self;
+    
+    self.TTTlogo.image = [UIImage imageNamed: @"TTTlogoRed.png"];
+    [self.view addSubview:self.TTTlogo];
+    
     // Do any additional setup after loading the view, typically from a nib.
-
+    
     //center
     CLLocationCoordinate2D tttLocation;
     tttLocation.latitude = TTT_LATITUDE;
@@ -55,9 +91,9 @@
     
     //2. Add annotation to mapView
     [self.myMapView addAnnotation: tttech];
-    
     [self initializeMyPins];
     
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,7 +114,7 @@
 }
 
 -(void) initializeMyPins {
-
+    
     // Add/Show pin for restaurants in Flatiron District
     
     Annotation *gramercyTavern = [Annotation alloc];
@@ -87,7 +123,7 @@
     gramercyTavern.subtitle = @"American Cuisine. Danny Meyer's Flatiron District tavern with a fixed-price-only dining room & a bustling bar area.";
     [self.myMapView addAnnotation:gramercyTavern];
     
-
+    
     Annotation *giorgios = [Annotation alloc];
     giorgios.coordinate = CLLocationCoordinate2DMake(40.739716, -73.988622);
     giorgios.title = @"Giorgio's of Gramercy";
@@ -104,8 +140,8 @@
     elevenMadisonPark.coordinate = CLLocationCoordinate2DMake(40.73748, -73.981331);
     elevenMadisonPark.title = @"Mediterranean Cuisine. Creative Lebanese small plates ideal for sharing in a trendy space that also serves cocktails.";
     [self.myMapView addAnnotation:elevenMadisonPark];
-
-
+    
+    
 }
 
 
@@ -119,46 +155,53 @@
     } else if (sender.selectedSegmentIndex == 2) {
         self.myMapView.mapType = MKMapTypeSatellite;
     }
-
+    
 }
 
 #pragma mark Map Annotation Methods
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
-
     // If it's the user location, just return nil.
     if ([annotation isKindOfClass:[MKUserLocation class]])
         return nil;
     
-    // Handle any custom annotations.
-    if ([annotation isKindOfClass:[MKPointAnnotation class]])
+    // Try to dequeue an existing pin view first.
+    MKAnnotationView *pinView = (MKAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Cell"];
+    if (!pinView)
     {
-        // Try to dequeue an existing pin view first.
-        MKAnnotationView *pinView = (MKAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Cell"];
-        if (!pinView)
-        {
-            // If an existing pin view was not available, create one.
-            pinView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Cell"];
-            pinView.canShowCallout = YES;
-//            pinView.image = [UIImage imageNamed:@"flower.gif"];
-            pinView.calloutOffset = CGPointMake(0, 32);
-            
-            // Add a detail disclosure button to the callout.
-            UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-            pinView.rightCalloutAccessoryView = rightButton;
-            
-            // Add an image to the left callout.
-            UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"flower.gif"]];
-            pinView.leftCalloutAccessoryView = iconView;
-            
-        } else {
-            pinView.annotation = annotation;
-        }
+        // try to dequeue an existing pin view first
+        static NSString* AnnotationIdentifier = @"Cell";
+        MKPinAnnotationView* pinView = [[MKPinAnnotationView alloc]
+                                        initWithAnnotation:annotation reuseIdentifier:AnnotationIdentifier];
+        pinView.animatesDrop = YES;
+        pinView.canShowCallout = YES;
+        pinView.draggable = NO;
+        pinView.annotation = annotation;
+        pinView.enabled = YES;
+        pinView.exclusiveTouch = YES;
+        pinView.highlighted = YES;
+        pinView.multipleTouchEnabled = YES;
+        pinView.pinTintColor = [UIColor colorWithRed:0.9 green:0.02 blue:1 alpha:1];
+        pinView.userInteractionEnabled = YES;
+        
+        // Add a detail disclosure button to the rhs of callout.
+        UIButton* detailButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        pinView.rightCalloutAccessoryView = detailButton;
+        
+        // Add a logo to the lhs of callout.
+        UIImageView * logoImage = [[UIImageView alloc] initWithImage: [UIImage imageNamed: @"flower.gif" ]];
+        pinView.leftCalloutAccessoryView = logoImage;
+        
+                pinView.annotation = annotation;
         return pinView;
+    } else {
+        pinView.annotation = annotation;
     }
     return nil;
 }
+
+
 
 -(void)mapView:(MKMapView*)mapView didSelectAnnotationView:(MKAnnotationView*)view {
     
@@ -166,7 +209,7 @@
         
         Annotation * myAnnotation = (Annotation*)view.annotation;
         UIImageView * leftCalloutView = [[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 40, 40)];
-
+        
         if ([myAnnotation.title isEqualToString:@"TurnToTech"]) {
             // set tttlogo
             [leftCalloutView setImage:[UIImage imageNamed:@"tttlogo2.png"]];
@@ -174,30 +217,26 @@
             leftCalloutView.layer.cornerRadius = 6;
             
         }else {
-        
-            [leftCalloutView setImage:[UIImage imageNamed:@"dining.png"]];
+            
+            [leftCalloutView setImage:[UIImage imageNamed:@"flower.gif"]];
             leftCalloutView.layer.masksToBounds = YES;
             leftCalloutView.layer.cornerRadius = 6;
             
         }
         view.leftCalloutAccessoryView = leftCalloutView;
-
+        
         
     }
 }
 
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-    id <MKAnnotation> annotation = [view annotation];
-    if ([annotation isKindOfClass:[MKPointAnnotation class]])
-    {
-        NSLog(@"Clicked a pin");
-        
-        // Create the next view controller.
-        self.WebVC = [[WebViewController alloc]init];
-        self.WebVC.myWebURL= [NSURL URLWithString: @"http://www.turntotech.com"];
-        self.WebVC.title = @"TurnToTech";
-    }
-
-    [self.navigationController pushViewController:self.WebVC animated:YES];
+    
+    // Create the next view controller.
+    WebViewController *webVC = [[WebViewController alloc]initWithNibName:nil bundle:nil];
+    webVC.displayURL= @"http://www.turntotech.io";
+    webVC.title = @"TurnToTech";
+    [self.navigationController pushViewController:webVC animated:YES];
+    NSLog(@"Clicked a pin");
+    
 }
 @end

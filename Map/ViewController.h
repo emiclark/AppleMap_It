@@ -29,7 +29,6 @@
 
 
 -(IBAction) mapTypeTapped:(UISegmentedControl *)sender;
--(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
 
 @end
 

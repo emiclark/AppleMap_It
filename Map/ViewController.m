@@ -1,6 +1,6 @@
 //
 //  ViewController.m
-//  Map
+//  Map - zooms in on user location
 //
 //  Created by Aditya Narayan on 4/29/16.
 //  Copyright © 2016 Aditya Narayan. All rights reserved.
@@ -9,110 +9,45 @@
 #import "ViewController.h"
 
 
-@interface ViewController () <UISearchBarDelegate>
+@interface ViewController () <UISearchBarDelegate, UISearchBarDelegate>
 
 @end
 
 
 @implementation ViewController
-
-// initial coordinates
-#define TTT_LATITUDE 40.741434
-#define TTT_LONGITUDE -73.990039
-#define TTT_SPAN 0.01f;
+#define MY_SPAN 0.01f;
 
 
 #pragma mark Initialization Methods
 - (void)viewDidLoad {
     [super viewDidLoad];
-    CLAuthorizationStatus authorizationStatus = [CLLocationManager authorizationStatus];
-    if (authorizationStatus == kCLAuthorizationStatusAuthorizedAlways ||
-        authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse) {
-        
-        [self.locationManager startUpdatingLocation];
-        self.myMapView.showsUserLocation = YES;
-    }
-    
-    self.myMapView.delegate = self;
-    
-    //set TTTlogo on top lhs
-    self.TTTlogo.image = [UIImage imageNamed: @"TTTlogoRed.png"];
-    [self.view addSubview:self.TTTlogo];
-    
-    // center
-    CLLocationCoordinate2D tttLocation;
-    tttLocation.latitude = TTT_LATITUDE;
-    tttLocation.longitude = TTT_LONGITUDE;
-    
-    //span
-    MKCoordinateSpan span;
-    span.latitudeDelta = TTT_SPAN
-    
-    // Create Region
-    MKCoordinateRegion myRegion;
-    myRegion.center = tttLocation;
-    myRegion.span = span;
-    
-    [self.myMapView  setRegion:myRegion animated:YES];
-    [self initializeMyPins];
-}
-
--(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     self.locationManager = [[CLLocationManager alloc]init];
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager setDelegate: self];
     [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-    return self;
+
+    self.myMapView.delegate = self;
+    [self.locationManager startUpdatingLocation];
+    self.myMapView.showsUserLocation = YES;
+
 }
 
--(void) initializeMyPins {
 
-    //Add annotation for TurnToTech
-    CLLocationCoordinate2D tttLocation;
-    tttLocation.latitude = TTT_LATITUDE;
-    tttLocation.longitude = TTT_LONGITUDE;
-    
-    //1. Create a coordinate for use with the annotation
-    Annotation *tttech = [Annotation alloc];
-    tttech.coordinate = tttLocation;
-    tttech.title = @"TurnToTech";
-    tttech.subtitle = @"IOS BootCamp";
-    tttech.url = [NSURL URLWithString: @"http://www.turntotech.io"];
-    
-    //2. Add annotation to mapView
-    [self.myMapView addAnnotation: tttech];
-   
 
-//    // hardcode restaurants in Flatiron District
-//    
-//    Annotation *gramercyTavern = [Annotation alloc];
-//    gramercyTavern.coordinate = CLLocationCoordinate2DMake(40.738541, -73.988504);
-//    gramercyTavern.title = @"Gramercy Tavern";
-//    gramercyTavern.subtitle = @"American Cuisine. Danny Meyer's Flatiron District tavern with a fixed-price-only dining room & a bustling bar area.";
-//    [self.myMapView addAnnotation:gramercyTavern];
-//    
-//    
-//    Annotation *giorgios = [Annotation alloc];
-//    giorgios.coordinate = CLLocationCoordinate2DMake(40.739716, -73.988622);
-//    giorgios.title = @"Giorgio's of Gramercy";
-//    giorgios.subtitle = @"American Cuisine. Longtime eatery serving a New American menu along with numerous pasta dishes.";
-//    [self.myMapView addAnnotation:giorgios];
-//    
-//    Annotation *ILILI = [Annotation alloc];
-//    ILILI.coordinate = CLLocationCoordinate2DMake(40.748379, -73.996712);
-//    ILILI.title = @"Giorgio's of Gramercy";
-//    ILILI.subtitle = @"American Cuisine. Upscale American tasting menus from chef Daniel Humm served in a high-ceilinged art deco space.";
-//    [self.myMapView addAnnotation:ILILI];
-//    
-//    Annotation *elevenMadisonPark = [Annotation alloc];
-//    elevenMadisonPark.coordinate = CLLocationCoordinate2DMake(40.73748, -73.981331);
-//    elevenMadisonPark.title = @"Mediterranean Cuisine. Creative Lebanese small plates ideal for sharing in a trendy space that also serves cocktails.";
-//    [self.myMapView addAnnotation:elevenMadisonPark];
-//    
-    
+#pragma mark Map Update Methods
+- (void)mapView:(MKMapView *)aMapView didUpdateUserLocation:(MKUserLocation *)aUserLocation {
+    MKCoordinateRegion region;
+    MKCoordinateSpan span;
+    span.latitudeDelta = MY_SPAN;
+    span.longitudeDelta = MY_SPAN;
+    CLLocationCoordinate2D location;
+    location.latitude = aUserLocation.coordinate.latitude;
+    location.longitude = aUserLocation.coordinate.longitude;
+    region.span = span;
+    region.center = location;
+    [aMapView setRegion:region animated:YES];
 }
+
 
 #pragma mark Map Annotation Methods
 
@@ -232,15 +167,17 @@
          }
          [self.myMapView removeAnnotations:[self.myMapView annotations]];
          [self.myMapView addAnnotations:annotations ];
-         
      }];
     
 }
 
 #pragma mark Utility Methods
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 @end
+
+
